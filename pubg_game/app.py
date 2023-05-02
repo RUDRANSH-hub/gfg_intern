@@ -1,7 +1,9 @@
 # %%writefile app.py
-import streamlit as st
+import streamlit as st 
+import joblib
+from joblib import Parallel
 import pandas as pd
-import pickle
+import os
 # import pubg_model
 def load_model(model_file):
 	loaded_model = joblib.load(open(os.path.join(model_file),"rb"))
