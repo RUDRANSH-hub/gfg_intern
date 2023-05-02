@@ -3,7 +3,9 @@ import streamlit as st
 import pandas as pd
 import pickle
 # import pubg_model
-
+def load_model(model_file):
+	loaded_model = joblib.load(open(os.path.join(model_file),"rb"))
+	return loaded_model
 # Create a sidebar
 st.sidebar.title('PUBG Win Prediction')
 
@@ -16,7 +18,8 @@ def predict_win_place_perc(DBNOs, headshotKills, killPlace, killPoints, killStre
     
     # Load the pre-trained CatBoost model
     
-    model = pickle.load(open('pubg_model','rb'))
+#     model = pickle.load(open('pubg_model','rb'))
+    model=load_model('pubg_model')
 
 
     # Encode matchType as a one-hot vector
