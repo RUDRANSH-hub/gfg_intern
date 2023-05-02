@@ -1,7 +1,7 @@
 import streamlit as st
 import pandas as pd
 import pickle
-import pubg_model
+# import pubg_model
 
 # Create a sidebar
 st.sidebar.title('PUBG Win Prediction')
