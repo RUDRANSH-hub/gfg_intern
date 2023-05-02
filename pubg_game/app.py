@@ -1,3 +1,4 @@
+%%writefile app.py
 import streamlit as st
 import pandas as pd
 import pickle
@@ -5,9 +6,6 @@ import pickle
 
 # Create a sidebar
 st.sidebar.title('PUBG Win Prediction')
-
-import pickle
-import pandas as pd
 
 def predict_win_place_perc(DBNOs, headshotKills, killPlace, killPoints, killStreaks,
                            longestKill, matchType, numGroups, rankPoints, roadKills,
