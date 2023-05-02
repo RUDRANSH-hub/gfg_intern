@@ -19,7 +19,7 @@ def predict_win_place_perc(DBNOs, headshotKills, killPlace, killPoints, killStre
     
     # Load the pre-trained CatBoost model
 
-    model = pickle.load(open('model_pubg','rb'))
+    model = pickle.load(open('pubg_model','rb'))
 
 
     # Encode matchType as a one-hot vector
