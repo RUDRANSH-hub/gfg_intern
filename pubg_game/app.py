@@ -1,5 +1,4 @@
-# %%writefile app.py
-import streamlit as st 
+import streamlit as st
 import joblib
 from joblib import Parallel
 import pandas as pd
@@ -21,7 +20,7 @@ def predict_win_place_perc(DBNOs, headshotKills, killPlace, killPoints, killStre
     # Load the pre-trained CatBoost model
     
 #     model = pickle.load(open('pubg_model','rb'))
-    model=load_model('pubg_model')
+    model=load_model('pubg_model.pkl')
 
 
     # Encode matchType as a one-hot vector
@@ -66,46 +65,40 @@ def predict_win_place_perc(DBNOs, headshotKills, killPlace, killPoints, killStre
 
 
 
-def app():
-    st.title('PUBG Win Place Prediction')
-    
-    DBNOs = st.number_input('DBNOs', min_value=0)
-    headshotKills = st.number_input('Headshot Kills', min_value=0)
-    killPlace = st.number_input('Kill Place', min_value=1)
-    killPoints = st.number_input('Kill Points', min_value=0)
-    killStreaks = st.number_input('Kill Streaks', min_value=0)
-    longestKill = st.number_input('Longest Kill', min_value=0)
-    matchType = st.selectbox('Match Type', ['solo', 'duo', 'squad', 'solo-fpp', 'duo-fpp', 'squad-fpp'])
-    numGroups = st.number_input('Num Groups', min_value=1)
-    rankPoints = st.number_input('Rank Points', min_value=0)
-    roadKills = st.number_input('Road Kills', min_value=0)
-    teamKills = st.number_input('Team Kills', min_value=0)
-    vehicleDestroys = st.number_input('Vehicle Destroys', min_value=0)
-    weaponsAcquired= st.number_input('Weapons Acquired', min_value=0)
-    winPoints = st.number_input('Win Points', min_value=0)
-    playersJoined = st.number_input('Players Joined', min_value=1)
-    totalDistance = st.number_input('Total Distance', min_value=0)
-    killswithoutMoving = st.number_input('Kills Without Moving', min_value=0)
-    headshot_rate = st.number_input('Headshot Rate', min_value=0)
-    killsNorm = st.number_input('Kills Norm', min_value=0)
-    damageDealtNorm = st.number_input('Damage Dealt Norm', min_value=0)
-    maxPlaceNorm = st.number_input('Max Place Norm', min_value=0)
-    matchDurationNorm = st.number_input('Match Duration Norm', min_value=0)
-    traveldistance = st.number_input('Travel Distance', min_value=0)
-    healsnboosts = st.number_input('Heals and Boosts', min_value=0)
-    assist = st.number_input('Assist', min_value=0)
+st.title('PUBG Win Place Prediction')
 
-    if st.button('Predict Win Place Percentage'):
-        result = predict_win_place_perc(DBNOs, headshotKills, killPlace, killPoints, killStreaks,
-                                        longestKill, matchType, numGroups, rankPoints, roadKills,
-                                        teamKills, vehicleDestroys, weaponsAcquired, winPoints,
-                                        playersJoined, totalDistance, killswithoutMoving,
-                                        headshot_rate, killsNorm, damageDealtNorm, maxPlaceNorm,
-                                        matchDurationNorm, traveldistance, healsnboosts, assist)
-        st.success('The predicted Win Place Percentage is {:.2f}'.format(result))
+DBNOs = st.number_input('DBNOs', min_value=0)
+headshotKills = st.number_input('Headshot Kills', min_value=0)
+killPlace = st.number_input('Kill Place', min_value=1)
+killPoints = st.number_input('Kill Points', min_value=0)
+killStreaks = st.number_input('Kill Streaks', min_value=0)
+longestKill = st.number_input('Longest Kill', min_value=0)
+matchType = st.selectbox('Match Type', ['solo', 'duo', 'squad', 'solo-fpp', 'duo-fpp', 'squad-fpp'])
+numGroups = st.number_input('Num Groups', min_value=1)
+rankPoints = st.number_input('Rank Points', min_value=0)
+roadKills = st.number_input('Road Kills', min_value=0)
+teamKills = st.number_input('Team Kills', min_value=0)
+vehicleDestroys = st.number_input('Vehicle Destroys', min_value=0)
+weaponsAcquired= st.number_input('Weapons Acquired', min_value=0)
+winPoints = st.number_input('Win Points', min_value=0)
+playersJoined = st.number_input('Players Joined', min_value=1)
+totalDistance = st.number_input('Total Distance', min_value=0)
+killswithoutMoving = st.number_input('Kills Without Moving', min_value=0)
+headshot_rate = st.number_input('Headshot Rate', min_value=0)
+killsNorm = st.number_input('Kills Norm', min_value=0)
+damageDealtNorm = st.number_input('Damage Dealt Norm', min_value=0)
+maxPlaceNorm = st.number_input('Max Place Norm', min_value=0)
+matchDurationNorm = st.number_input('Match Duration Norm', min_value=0)
+traveldistance = st.number_input('Travel Distance', min_value=0)
+healsnboosts = st.number_input('Heals and Boosts', min_value=0)
+assist = st.number_input('Assist', min_value=0)
 
+if st.button('Predict Win Place Percentage'):
+	result = predict_win_place_perc(DBNOs, headshotKills, killPlace, killPoints, killStreaks,
+					longestKill, matchType, numGroups, rankPoints, roadKills,
+					teamKills, vehicleDestroys, weaponsAcquired, winPoints,
+					playersJoined, totalDistance, killswithoutMoving,
+					headshot_rate, killsNorm, damageDealtNorm, maxPlaceNorm,
+					matchDurationNorm, traveldistance, healsnboosts, assist)
+	st.success('The predicted Win Place Percentage is {:.2f}'.format(result))
 
-
-
-if __name__ == '__main__':
-    app()
